@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Change this to your exact GitHub profile path
-                git branch: 'main', url: 'https://github.com<your-username>/Student-Management-System.git'
+                git branch: 'main', url: 'https://github.com/kris-shna/Project1.git'
             }
         }
         
