@@ -4,4 +4,3 @@ with open("report.txt", "w") as f:
     f.write("Active Student Sessions: 85\n")
 
 print("Report generated.")
-s
