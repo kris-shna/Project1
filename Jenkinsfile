@@ -1,25 +1,31 @@
 pipeline {
     agent any
     
+    environment {
+        APP_NAME = 'StudentPerformanceSystem'
+        APP_VERSION = '1.0.0'
+    }
+    
     stages {
         stage('Checkout') {
             steps {
-                // Replace with your real working GitHub Username and Repository Name
-                git branch: 'main', url: 'https://github.com/kris-shna/Project1.git'
+                // Change this to your exact GitHub profile path
+                git branch: 'main', url: 'https://github.com<your-username>/Student-Management-System.git'
             }
         }
         
-        stage('Generate Report') {
+        stage('Show App Info') {
             steps {
-                // Runs the python program to generate the text file on a Windows agent
-                bat 'python app.py'
+                // Reads custom environment variables using the env namespace
+                echo "Building ${env.APP_NAME}, version ${env.APP_VERSION}"
             }
         }
         
-        stage('Archive Report') {
+        stage('Build') {
             steps {
-                // Captures and stores the generated file inside the Jenkins UI
-                archiveArtifacts artifacts: 'report.txt', fingerprint: true
+                // Compiles the python code to check for syntax bugs before deployment
+                bat 'python -m py_compile app.py'
+                echo "${env.APP_NAME} version ${env.APP_VERSION} compiled successfully."
             }
         }
     }
