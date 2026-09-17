@@ -1,29 +1,25 @@
 pipeline {
     agent any
     
-    parameters {
-        choice(name: 'MODULE', choices: ['Student-Portal', 'Grading-System', 'Attendance-Tracker'], description: 'Select the system module to build')
-    }
-    
     stages {
         stage('Checkout') {
             steps {
-                // Clones the repository codebase into the Jenkins workspace
-                git branch: 'main', url: 'https://github.com/kris-shna/Project1.git'
+                // Replace with your real working GitHub Username and Repository Name
+                git branch: 'main', url: 'https://github.com<your-username>/Student-Management-System.git'
             }
         }
         
-        stage('Show Parameter') {
+        stage('Generate Report') {
             steps {
-                // Echoes back the chosen module input at build time
-                echo "Selected Module: ${params.MODULE}"
+                // Runs the python program to generate the text file on a Windows agent
+                bat 'python app.py'
             }
         }
         
-        stage('Build for Module') {
+        stage('Archive Report') {
             steps {
-                // Simulates building binaries or launching verification checks for the chosen application subsystem
-                echo "Building application configurations for the ${params.MODULE} module..."
+                // Captures and stores the generated file inside the Jenkins UI
+                archiveArtifacts artifacts: 'report.txt', fingerprint: true
             }
         }
     }
