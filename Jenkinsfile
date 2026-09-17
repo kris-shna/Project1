@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clones the repository codebase into the Jenkins workspace
-                git branch: 'main', url: 'https://github.com/<your-student-username>/Student-Management-System.git'
+                git branch: 'main', url: 'https://github.com/kris-shna/Project1.git'
             }
         }
         
